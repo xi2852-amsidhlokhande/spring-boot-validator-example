@@ -10,6 +10,7 @@ import javax.validation.constraints.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class UserDto {
 
     @NotNull(message = "emailId must be required", groups = {UserDto_EmailId_NotNullValidationGroup.class})
