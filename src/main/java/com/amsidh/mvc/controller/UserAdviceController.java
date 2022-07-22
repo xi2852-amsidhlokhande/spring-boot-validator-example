@@ -1,4 +1,4 @@
-package com.amsidh.mvc.error.handler;
+package com.amsidh.mvc.controller;
 
 import com.amsidh.mvc.controller.response.GenericResponse;
 import com.amsidh.mvc.error.ErrorDetails;
@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.validation.ConstraintViolation;
@@ -18,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RestControllerAdvice
-public class PersonAdviceController {
+public class UserAdviceController {
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity handleConstraintViolation(ConstraintViolationException ex) {
