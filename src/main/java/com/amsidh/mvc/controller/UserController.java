@@ -12,21 +12,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
+@Validated
 public class UserController {
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity validateUser(@RequestBody @Validated(UserDtoValidationSequence.class) UserDto userDto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            List<ErrorDetails> errorDetailsList = bindingResult.getFieldErrors().stream().map(fieldError -> {
-                return ErrorDetails.builder().fieldName(fieldError.getField()).code("1002").message(fieldError.getDefaultMessage()).build();
-            }).collect(Collectors.toList());
-            return ResponseEntity.ok(GenericResponse.builder().errorDetails(errorDetailsList).build());
-        }
+    @Validated(UserDtoValidationSequence.class)
+    public ResponseEntity validateUser(@RequestBody @Valid UserDto userDto) {
         return ResponseEntity.ok(GenericResponse.builder().data(userDto).build());
     }
 }
